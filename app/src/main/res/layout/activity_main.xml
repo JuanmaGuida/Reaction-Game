@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="20dp"
+    android:background="@color/background_app">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_panel"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Desafío de Reacción"
+            android:textColor="@color/text_primary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Establezca jugador, dificultad y tiempo máximo"
+            android:textColor="@color/text_secondary" />
+
+        <EditText
+            android:id="@+id/playerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:hint="Nombre del jugador"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:textColorHint="#999999"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Modo de dificultad"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <RadioGroup
+            android:id="@+id/difficultyMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/trainingMode"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="Entrenamiento"
+                android:textColor="#FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/easyMode"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:checked="true"
+                android:text="Fácil"
+                android:textColor="#FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/mediumMode"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="Medio"
+                android:textColor="#FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/hardMode"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="Difícil"
+                android:textColor="#FFFFFF" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textRoundsValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="20 rondas por etapa"
+            android:textColor="@color/text_primary" />
+
+        <SeekBar
+            android:id="@+id/seekRounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="35"
+            android:progress="15" />
+
+        <TextView
+            android:id="@+id/textTimeValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="20 segundos máximos"
+            android:textColor="@color/text_primary" />
+
+        <SeekBar
+            android:id="@+id/seekTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="25"
+            android:progress="15" />
+
+        <CheckBox
+            android:id="@+id/checkInverse"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="12dp"
+            android:text="Activar modo reacción inversa"
+            android:textColor="#FFFFFF" />
+
+        <CheckBox
+            android:id="@+id/checkAdaptive"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:checked="true"
+            android:text="Activar ajuste dinámico de tiempo"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Comenzar partida"
+            android:backgroundTint="@color/action_primary" />
+
+        <Button
+            android:id="@+id/buttonRecords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Ver mejores resultados" />
+
+    </LinearLayout>
+
+</ScrollView>

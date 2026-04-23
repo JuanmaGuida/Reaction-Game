@@ -1,0 +1,7 @@
+<resources>
+    <color name="background_app">#101821</color>
+    <color name="panel_bg">#1B2733</color>
+    <color name="text_primary">#F4F8FB</color>
+    <color name="text_secondary">#B7C8D6</color>
+    <color name="action_primary">#42C29B</color>
+</resources>
