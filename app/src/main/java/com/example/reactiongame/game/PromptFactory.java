@@ -7,6 +7,8 @@ import java.util.Random;
 public class PromptFactory {
     private static final String[] WORDS = {"CASA", "SOL", "VECTOR", "ERROR",
             "CODIGO", "NUBE", "ATENCION", "MOTOR", "TECLADO", "ROBOT"};
+    private static final int[] COLORS = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.CYAN};
+    private static final String[] COLOR_NAMES = {"ROJO", "VERDE", "AZUL", "AMARILLO", "VIOLETA", "CELESTE"};
     private final Random random = new Random();
 
     public Prompt createPrompt(int stage, boolean inverseMode) {
@@ -21,19 +23,18 @@ public class PromptFactory {
     }
 
     private Prompt createColorPrompt(boolean inverseMode) {
-        int[] palette = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.CYAN};
-        String[] names = {"ROJO", "VERDE", "AZUL", "AMARILLO", "VIOLETA", "CELESTE"};
-        int index = random.nextInt(names.length);
+        int index = random.nextInt(COLOR_NAMES.length);
+        int targetIndex = random.nextInt(COLOR_NAMES.length);
         boolean correctAnswer;
         String rule;
         if (inverseMode) {
-            rule = "Modo inverso: NO tocar si aparece ROJO";
-            correctAnswer = index != 0;
+            rule = "Modo inverso: NO tocar si aparece " + COLOR_NAMES[targetIndex];
+            correctAnswer = index != targetIndex;
         } else {
-            rule = "Tocar solo si aparece un color frío (AZUL, CELESTE o VIOLETA)";
-            correctAnswer = index == 2 || index == 4 || index == 5;
+            rule = "Tocar solo si aparece " + COLOR_NAMES[targetIndex];
+            correctAnswer = index == targetIndex;
         }
-        return new Prompt(1, rule, names[index], palette[index], correctAnswer, "Etapa 1: colores");
+        return new Prompt(1, rule, COLOR_NAMES[index], COLORS[index], correctAnswer, "Etapa 1: colores");
     }
 
     private Prompt createNumberPrompt(boolean inverseMode) {
@@ -55,8 +56,9 @@ public class PromptFactory {
         boolean correctAnswer;
         String rule;
         if (inverseMode) {
-            rule = "Modo inverso: NO tocar si la palabra es ERROR";
-            correctAnswer = !"ERROR".equals(word);
+            String forbiddenWord = WORDS[random.nextInt(WORDS.length)];
+            rule = "Modo inverso: NO tocar si la palabra es " + forbiddenWord;
+            correctAnswer = !forbiddenWord.equals(word);
         } else {
             rule = "Tocar solo si la palabra tiene 5 letras o más";
             correctAnswer = word.length() >= 5;
