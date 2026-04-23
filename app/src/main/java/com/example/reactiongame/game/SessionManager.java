@@ -122,7 +122,7 @@ public class SessionManager {
         return config;
     }
 
-    public double getAverageReactionMs() {
+    public double getAverageReactionSeconds() {
         if (successfulTimes.isEmpty()) {
             return 0;
         }
@@ -130,7 +130,7 @@ public class SessionManager {
         for (Long time : successfulTimes) {
             sum += time;
         }
-        return (double) sum / successfulTimes.size();
+        return ((double) sum / successfulTimes.size()) / 1000d;
     }
 
     public TurnResult submitTap(long reactionMs) {
@@ -201,7 +201,7 @@ public class SessionManager {
                 score,
                 correctAnswers,
                 totalRounds,
-                getAverageReactionMs(),
+                getAverageReactionSeconds(),
                 won,
                 config.isTraining()
         );

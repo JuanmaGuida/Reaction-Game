@@ -15,7 +15,8 @@ import java.util.Map;
 public class ScoreRepository {
     private static final String PREF_NAME = "reaction_local_records";
     private static final String SCORE_PREFIX = "score_";
-    private static final String AVG_PREFIX = "avg_";
+    private static final String AVG_PREFIX = "avg_seconds_";
+    private static final String AVG_MS_PREFIX = "avg_";
 
     private final SharedPreferences preferences;
 
@@ -33,15 +34,15 @@ public class ScoreRepository {
         String avgKey = AVG_PREFIX + player;
 
         int storedScore = preferences.getInt(scoreKey, -1);
-        float storedAvg = preferences.getFloat(avgKey, Float.MAX_VALUE);
+        float storedAvg = getStoredAverageSeconds(player);
 
         boolean better = result.getScore() > storedScore ||
-                (result.getScore() == storedScore && result.getAverageReactionMs() > 0 && result.getAverageReactionMs() < storedAvg);
+                (result.getScore() == storedScore && result.getAverageReactionSeconds() > 0 && result.getAverageReactionSeconds() < storedAvg);
 
         if (better) {
             preferences.edit()
                     .putInt(scoreKey, result.getScore())
-                    .putFloat(avgKey, (float) result.getAverageReactionMs())
+                    .putFloat(avgKey, (float) result.getAverageReactionSeconds())
                     .apply();
         }
     }
@@ -49,11 +50,11 @@ public class ScoreRepository {
     public String getSinglePlayerSummary(String playerName) {
         String player = reformat(playerName);
         int bestScore = preferences.getInt(SCORE_PREFIX + player, -1);
-        float bestAvg = preferences.getFloat(AVG_PREFIX + player, Float.MAX_VALUE);
+        float bestAvg = getStoredAverageSeconds(player);
         if (bestScore < 0) {
             return "Sin récord guardado todavía";
         }
-        String avgText = bestAvg == Float.MAX_VALUE ? "Sin dato" : String.format(Locale.getDefault(), "%.0f ms", bestAvg);
+        String avgText = bestAvg == Float.MAX_VALUE ? "Sin dato" : String.format(Locale.getDefault(), "%.2f s", bestAvg);
         return String.format(Locale.getDefault(), "Mejor puntaje guardado: %d\nMejor promedio: %s", bestScore, avgText);
     }
 
@@ -67,7 +68,7 @@ public class ScoreRepository {
             }
             String player = key.substring(SCORE_PREFIX.length());
             int score = preferences.getInt(key, 0);
-            float avg = preferences.getFloat(AVG_PREFIX + player, Float.MAX_VALUE);
+            float avg = getStoredAverageSeconds(player);
             result.add(new PlayerRecord(player, score, avg));
         }
         Collections.sort(result, new Comparator<PlayerRecord>() {
@@ -100,10 +101,22 @@ public class ScoreRepository {
                     .append("\nPuntaje: ")
                     .append(record.getBestScore())
                     .append("\nPromedio: ")
-                    .append(record.getBestAverage() == Float.MAX_VALUE ? "Sin dato" : String.format(Locale.getDefault(), "%.0f ms", record.getBestAverage()));
+                    .append(record.getBestAverage() == Float.MAX_VALUE ? "Sin dato" : String.format(Locale.getDefault(), "%.2f s", record.getBestAverage()));
             position++;
         }
         return builder.toString();
+    }
+
+    private float getStoredAverageSeconds(String player) {
+        String secondsKey = AVG_PREFIX + player;
+        if (preferences.contains(secondsKey)) {
+            return preferences.getFloat(secondsKey, Float.MAX_VALUE);
+        }
+        String legacyMsKey = AVG_MS_PREFIX + player;
+        if (preferences.contains(legacyMsKey)) {
+            return preferences.getFloat(legacyMsKey, Float.MAX_VALUE) / 1000f;
+        }
+        return Float.MAX_VALUE;
     }
 
     private String reformat(String value) {

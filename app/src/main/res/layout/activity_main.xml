@@ -36,8 +36,8 @@
             android:hint="Nombre del jugador"
             android:inputType="textPersonName"
             android:maxLines="1"
-            android:textColorHint="#999999"
-            android:textColor="#FFFFFF" />
+            android:textColorHint="@color/text_tertiary"
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:text="Entrenamiento"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/text_primary" />
 
             <RadioButton
                 android:id="@+id/easyMode"
@@ -66,21 +66,21 @@
                 android:layout_height="34dp"
                 android:checked="true"
                 android:text="Fácil"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/text_primary" />
 
             <RadioButton
                 android:id="@+id/mediumMode"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:text="Medio"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/text_primary" />
 
             <RadioButton
                 android:id="@+id/hardMode"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:text="Difícil"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/text_primary" />
         </RadioGroup>
 
         <TextView
@@ -119,7 +119,7 @@
             android:layout_height="34dp"
             android:layout_marginTop="12dp"
             android:text="Activar modo reacción inversa"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/text_primary" />
 
         <CheckBox
             android:id="@+id/checkAdaptive"
@@ -127,7 +127,7 @@
             android:layout_height="34dp"
             android:checked="true"
             android:text="Activar ajuste dinámico de tiempo"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/text_primary" />
 
         <Button
             android:id="@+id/buttonStart"

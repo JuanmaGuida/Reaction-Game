@@ -156,7 +156,7 @@ public class GameActivity extends AppCompatActivity {
         summaryIntent.putExtra(ExtraKeys.RESULT_SCORE, result.getScore());
         summaryIntent.putExtra(ExtraKeys.RESULT_CORRECT, result.getCorrectAnswers());
         summaryIntent.putExtra(ExtraKeys.RESULT_TOTAL, result.getTotalRounds());
-        summaryIntent.putExtra(ExtraKeys.RESULT_AVG, result.getAverageReactionMs());
+        summaryIntent.putExtra(ExtraKeys.RESULT_AVG, result.getAverageReactionSeconds());
         summaryIntent.putExtra(ExtraKeys.RESULT_TRAINING, result.isTraining());
         startActivity(summaryIntent);
         finish();

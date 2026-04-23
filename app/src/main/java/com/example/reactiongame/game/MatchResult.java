@@ -5,16 +5,16 @@ public class MatchResult {
     private final int score;
     private final int correctAnswers;
     private final int totalRounds;
-    private final double averageReactionMs;
+    private final double averageReactionSeconds;
     private final boolean win;
     private final boolean training;
 
-    public MatchResult(String playerName, int score, int correctAnswers, int totalRounds, double averageReactionMs, boolean win, boolean training) {
+    public MatchResult(String playerName, int score, int correctAnswers, int totalRounds, double averageReactionSeconds, boolean win, boolean training) {
         this.playerName = playerName;
         this.score = score;
         this.correctAnswers = correctAnswers;
         this.totalRounds = totalRounds;
-        this.averageReactionMs = averageReactionMs;
+        this.averageReactionSeconds = averageReactionSeconds;
         this.win = win;
         this.training = training;
     }
@@ -35,8 +35,8 @@ public class MatchResult {
         return totalRounds;
     }
 
-    public double getAverageReactionMs() {
-        return averageReactionMs;
+    public double getAverageReactionSeconds() {
+        return averageReactionSeconds;
     }
 
     public boolean isWin() {

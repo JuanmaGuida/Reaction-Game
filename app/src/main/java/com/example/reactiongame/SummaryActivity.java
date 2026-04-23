@@ -35,7 +35,7 @@ public class SummaryActivity extends AppCompatActivity {
         title.setText(win ? "Resultado final: victoria" : "Resultado final: derrota");
         body.setText(String.format(
                 Locale.getDefault(),
-                "Jugador: %s\nPuntaje: %d%s\nAciertos: %d/%d\nPromedio de reacción: %.0f ms",
+                "Jugador: %s\nPuntaje: %d%s\nAciertos: %d/%d\nPromedio de reacción: %.2f s",
                 player,
                 score,
                 training ? " (entrenamiento)" : "",
